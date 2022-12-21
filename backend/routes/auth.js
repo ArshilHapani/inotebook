@@ -4,9 +4,10 @@ const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fetchuser = require('../middleware/fetchuser')
 
-
-const JWT_SECRET = "ArshilIsLegend"
+const JWT_SECRET = "ArshilIsLegend" //Secret variable use to generate and varify token
+//! ROUTE-1
 // Create a user using: POST "/api/auth/createuser". Doesn't require authentication and login
 router.post('/createuser', [
     body('name', 'minimum name length require *3 char').isLength({ min: 3 }),
@@ -57,9 +58,8 @@ router.post('/createuser', [
 
     })
 
-
+//! ROUTE-2
 // Authenticate a user using: POST "/api/auth/login". no login required
-
 router.post('/login', [
     body('email', 'Enter a valid email format').isEmail(),
     body('password', 'Password cant be blank').exists(),
@@ -83,7 +83,6 @@ router.post('/login', [
             if (!passwordCompare) {
                 return res.status(400).json({ "error": "enter a valid email address or password" });
             }
-
             // Sending jwt to server
             const data = {
                 user: {
@@ -101,4 +100,19 @@ router.post('/login', [
 
     })
 
+
+//! ROUTE-3
+// Get logged in user details using: POST "/api/auth/getuser".  login required
+router.post('/getuser',fetchuser,async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const user = await User.findById(userId).select('-password'); // here .select method is used to select every field except password
+            res.send({user})
+        } catch (error) {
+            res.status(401).send({
+                message: "internal server error",
+            })
+            console.log({ errorMessage: error.message })
+        }
+    })
 module.exports = router;
