@@ -3,7 +3,7 @@ const mongoURI = "mongodb://localhost:27017/inotebook";
 
 const connectToMongo = ()=>{
     mongoose.connect(mongoURI,()=>{
-        console.log("Connection established");
+        console.log("Connection with mongo established");
     })
 }
 module.exports = connectToMongo;

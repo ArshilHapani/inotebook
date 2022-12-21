@@ -4,7 +4,7 @@ const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const fetchuser = require('../middleware/fetchuser')
+const fetchuser = require('../middleware/fetchuser');
 
 const JWT_SECRET = "ArshilIsLegend" //Secret variable use to generate and varify token
 //! ROUTE-1
@@ -16,7 +16,7 @@ router.post('/createuser', [
 ],
     async (req, res) => {
 
-        //If there are errors then return bad request and the errors
+        //If there are errors in validation controls then return bad request and the errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
