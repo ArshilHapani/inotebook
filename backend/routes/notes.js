@@ -3,6 +3,7 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const Note = require('../models/Note');
 const fetchuser = require('../middleware/fetchuser');
+const { request } = require('express');
 
 
 //! ROUTE-1
@@ -15,7 +16,7 @@ router.get('/fetchallnotes', fetchuser, async (req, res) => {
       res.status(500).send({
          message: "internal server error",
       })
-      console.log({ errorMessage: error.message })
+      console.log({ errorMessage: error.message });
    }
 })
 
@@ -47,18 +48,64 @@ router.post('/addnote', fetchuser, [
       res.status(500).send({
          message: "internal server error",
       })
-      console.log({ errorMessage: error.message })
+      console.log({ errorMessage: error.message });
    }
 
 })
 
 //! ROUTE-3
-// Updating a new notes : GET "/api/notes/addnote". no login required
-router.get('/api/notes/updatenote',fetchuser,(req,res)=>{
+// Updating a new notes : PUT "/api/notes/addnote".  login required
+router.put('/updatenote/:id', fetchuser, async (req, res) => {
    try {
-      
+      const { title, description, tag } = req.body;
+      //Create a new note object
+      const newNote = {};
+      if (title) newNote.title = title;
+      if (description) newNote.description = description;
+      if (tag) newNote.tag = tag;
+
+      //Find the note to be updated and update it
+      let note = await Note.findById(req.params.id);
+      if (!note) {
+         return request.status(404).send("NotFound");
+      }
+      //Allow updation to the valid user
+      if (note.user.toString() !== req.user.id) {
+         return request.status(401).send("InvalidUser");
+      }
+      note = await Note.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
+      res.json(note);
    } catch (error) {
-      
+      res.status(500).send({
+         message: "internal server error",
+      })
+      console.log({ errorMessage: error.message });
    }
 })
+
+//! ROUTE-4
+// Deleting a existing notes : DELETE "/api/notes/deletenote".  login required
+router.delete('/deletenote/:id', fetchuser, async (req, res) => {
+   try {
+      //Finding the user and verifying them
+      //Find the note to be delete and delete it 
+      let note = await Note.findById(req.params.id);
+      if (!note) {
+         return request.status(404).send("NotFound");
+      }
+      //Allow deletion to the valid user
+      if (note.user.toString() !== req.user.id) {
+         return request.status(401).send("InvalidUser");
+      }
+      note = await Note.findByIdAndDelete(req.params.id);
+      res.json({"Note" :"deleted","note":note});
+   } catch (error) {
+      res.status(500).send({
+         message: "internal server error",
+      })
+      console.log({ errorMessage: error.message });
+   }
+})
+
+
 module.exports = router;
