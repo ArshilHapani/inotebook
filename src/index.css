@@ -1,13 +1,137 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Pacifico&family=Work+Sans:wght@900&display=swap");
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+}
+body {
+  overflow-x: hidden;
+}
+/*------------------------------------ Navbar ----------------------------------------------*/
+header {
+  padding: 2vh 0.7vw;
+  background-color: #f8f9fa;
+}
+header ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+header ul .top-nav-item {
+  padding: 0 1vw;
+  font-size: 2.6vh;
+  cursor: pointer;
+  color: #585858;
+  text-decoration: none;
+}
+header ul .top-nav-item.active {
+  color: black;
+}
+header ul .top-nav-item.prime {
+  font-size: 1.3em;
+}
+/* ----------------------------------- Dark Container-------------------------------------- */
+.dark-container {
+  background-color: #121212;
+  color: #fff;
+}
+/* ----------------------------------- Notes input Form-------------------------------------- */
+.form-container {
+  margin: 2vh 0 0 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+.input-form {
+  display: flex;
+  width: 70vw;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.input-form label {
+  font-size: 2.6vh;
+  padding: 1vh 0 1vh 0;
+}
+.title-input {
+  padding: 1.8vh;
+  border: 1px solid rgb(84, 84, 84);
+  border-radius: 0.7vh;
+  -webkit-border-radius: 0.7vh;
+  -moz-border-radius: 0.7vh;
+  -ms-border-radius: 0.7vh;
+  -o-border-radius: 0.7vh;
+}
+.title-input:focus {
+  outline: rgb(84, 84, 84);
+}
+.title-input.desc {
+  resize: none;
+}
+.add-note-btn {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  height: 8vh;
+  width: 1vw;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 5vh;
+}
+/* -----------------------------------------Notes items------------------------------------- */
+.row {  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.notes-cards {
+  margin: 1vh;
+  min-height: 10vh;
+  width: 20vw;
+  padding: 2vh;
+  border-radius: 1vh;
+  border: 1px solid #717070b1;
+  -webkit-border-radius: 1vh;
+  -moz-border-radius: 1vh;
+  -ms-border-radius: 1vh;
+  -o-border-radius: 1vh;
+}
+.notes-card-title {
+  font-weight: 800;
+  font-size: 1.3em;
+  padding-bottom: 0.7vh;
+}
+.notes-card-description {
+  font-size: 1.01em;
+  color: #121212;
+  margin-bottom: 3vh;
+}
+.card-modif-icon {
+  cursor: pointer;
+  font-size: 1.4em;
+  margin-right: 1vw;
+  margin-top: 30px;
+}
+/* ----------------------------Cuustom Alerts-------------------------------- */
+.custom-alert {
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  padding: 1vh 2vw;
+}
+.custom-alert.green {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+.custom-alert.red {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+.custom-alert.yellow {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
 }
