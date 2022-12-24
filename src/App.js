@@ -12,33 +12,35 @@ import NoteState from './context/notes/NoteState';
 
 
 function App() {
-  const setAlert = (type, message) => {
-      {
-        //TODO
-      }
-  }
+  // const setAlert = (type, message) => {
+  //     {
+  //       //TODO
+  //     }
+  // }
   return (
     <>
       <NoteState>
         <Router>
-          <Navbar />
-          <Alert type="red"
-            message="This is the green alert"
-          />
-          <Routes>
-            <Route
-              exact path='/about'
-              element={
-                <About />
-              }
+          <div>
+            <Navbar />
+            <Alert type="red"
+              message="This is the green alert"
             />
-            <Route
-              exact path='/'
-              element={
-                <Home />
-              }
-            />
-          </Routes>
+            <Routes>
+              <Route
+                exact path='/about'
+                element={
+                  <About />
+                }
+              />
+              <Route
+                exact path='/'
+                element={
+                  <Home />
+                }
+              />
+            </Routes>
+          </div>
         </Router>
       </NoteState>
     </>
@@ -46,3 +48,4 @@ function App() {
 }
 
 export default App;
+//TODO make different functions for all different API Calls

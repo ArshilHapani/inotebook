@@ -5,6 +5,7 @@
 }
 body {
   overflow-x: hidden;
+  background-color: #f1f1f1;
 }
 /*------------------------------------ Navbar ----------------------------------------------*/
 header {
@@ -31,13 +32,12 @@ header ul .top-nav-item.prime {
 }
 /* ----------------------------------- Dark Container-------------------------------------- */
 .dark-container {
-  background-color: #121212;
+  background-color: #121212 !important;
   color: #fff;
-}
+ }
 /* ----------------------------------- Notes input Form-------------------------------------- */
 .form-container {
   margin: 2vh 0 0 0;
-  width: 100vw;
   display: flex;
   justify-content: center;
 }
@@ -54,11 +54,15 @@ header ul .top-nav-item.prime {
 .title-input {
   padding: 1.8vh;
   border: 1px solid rgb(84, 84, 84);
-  border-radius: 0.7vh;
-  -webkit-border-radius: 0.7vh;
-  -moz-border-radius: 0.7vh;
-  -ms-border-radius: 0.7vh;
-  -o-border-radius: 0.7vh;
+  border-radius: 0.9vh;
+  -webkit-border-radius: 0.9vh;
+  -moz-border-radius: 0.9vh;
+  -ms-border-radius: 0.9vh;
+  -o-border-radius: 0.9vh;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  border-radius: 11px;
+  background: #fbfbfb;
+  box-shadow: 5px 5px 12px #b8b8b8, -5px -5px 12px #ffffff;
 }
 .title-input:focus {
   outline: rgb(84, 84, 84);
@@ -77,12 +81,13 @@ header ul .top-nav-item.prime {
   font-size: 5vh;
 }
 /* -----------------------------------------Notes items------------------------------------- */
-.row {  
+.row {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
+  width: 70vw;
 }
 
 .notes-cards {
@@ -96,6 +101,13 @@ header ul .top-nav-item.prime {
   -moz-border-radius: 1vh;
   -ms-border-radius: 1vh;
   -o-border-radius: 1vh;
+  border-radius: 16px;
+  background: #e0e0e0;
+  border-radius: 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 6px 6px 16px #a1a1a1, -6px -6px 16px #ffffff;
 }
 .notes-card-title {
   font-weight: 800;
@@ -134,4 +146,127 @@ header ul .top-nav-item.prime {
   color: #856404;
   background-color: #fff3cd;
   border-color: #ffeeba;
+}
+/* ----------------------------Model Style-------------------------------- */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+
+/* The Close Button */
+.close {
+  color: #000000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #878787;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2vh 16px;
+  background-color: #f8f9fa;
+  color: #161616;
+}
+
+.modal-body {
+  padding: 2vh 16px;
+  background-color: #f1f1f1;
+}
+
+.modal-footer {
+  padding: 2vh 16px;
+  background-color: #f8f9fa;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.modal-footer button {
+  padding: 8px 10px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+  transition: 0.17s ease-in-out;
+  -webkit-transition: 0.17s ease-in-out;
+  -moz-transition: 0.17s ease-in-out;
+  -ms-transition: 0.17s ease-in-out;
+  -o-transition: 0.17s ease-in-out;
+}
+.modal-footer button:hover {
+  background-color: black;
+  color: #fff;
+  border: 1px solid #fff;
 }

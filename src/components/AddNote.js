@@ -25,7 +25,9 @@ export default function AddNote() {
                 <label htmlFor="title">Enter Title</label>
                 <input type="text" className="title-input" id='title' name="title" onChange={onChange} /><br />
                 <label htmlFor="description">Description</label>
-                <textarea name="description" className="title-input desc" id="description" cols="30" rows="10" onChange={onChange}></textarea>
+                <textarea name="description"  className="title-input desc" id="description" cols="30" rows="10" onChange={onChange}></textarea>    
+                <label htmlFor="tag">Tag</label>    
+                <input type="text" className="title-input"  id='tag' name="tag" onChange={onChange} />        
                 <button className="add-note-btn" onClick={handleClick}><ion-icon name="add-outline"></ion-icon></button>
             </form>
         </div>
