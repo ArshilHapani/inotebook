@@ -7,6 +7,15 @@ body {
   overflow-x: hidden;
   background-color: #f1f1f1;
 }
+::-webkit-scrollbar{
+  width: .4vw;
+}
+::-webkit-scrollbar-track{
+  background-color: white;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #000000;
+}
 /*------------------------------------ Navbar ----------------------------------------------*/
 header {
   padding: 2vh 0.7vw;
@@ -93,7 +102,9 @@ header ul .top-nav-item.prime {
 .notes-cards {
   margin: 1vh;
   min-height: 10vh;
-  width: 20vw;
+  min-width: 20vw;
+  max-width: 80vw;
+  word-wrap: break-word;
   padding: 2vh;
   border-radius: 1vh;
   border: 1px solid #717070b1;
