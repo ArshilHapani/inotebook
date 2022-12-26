@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 import NoteContext from './NoteContext';
 const NoteState = (props) => {
     let host = "http://localhost:3500";
 
-    const notesInitial = []
-    const [notes, setNotes] = useState(notesInitial)
+
+    const [notes, setNotes] = useState([]);
 
 
     //! Get all note    
@@ -18,8 +18,7 @@ const NoteState = (props) => {
                 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNhMzAwM2Q2MTg4N2JkZjliODgyYzEyIn0sImlhdCI6MTY3MTY0NDQ0M30.21n8AFk5E8GLJC7SKviIaLe06trxm8rPGudebOBU97s'
             }
         })
-        let json = await response.json()
-        console.log(json);
+        let json = await response.json()              
         setNotes(json);
     }
 
@@ -37,9 +36,8 @@ const NoteState = (props) => {
             body: JSON.stringify({ title, description, tag })
         })
         const json = await response.json();
-        console.log(json);
+        //On client side      
 
-        //On client side
         let note = {
             "_id": "63a44e1f544c5d1b89851c3ad5",
             "user": "63a3003d61887bdf9b882c12",
@@ -48,8 +46,8 @@ const NoteState = (props) => {
             "tag": tag,
             "date": "2022-12-22T12:31:27.614Z",
             "__v": 0
-        };
-        setNotes(notes.concat(note))
+        }; 
+        setNotes(notes.concat(note));
     }
 
 
@@ -65,7 +63,6 @@ const NoteState = (props) => {
             // body: JSON.stringify({ id })
         })
         const json = response.json();
-        console.log(json);
         //Client side method
         let newNotes = notes.filter((note) => {
             return note._id !== id
@@ -85,26 +82,26 @@ const NoteState = (props) => {
             },
             body: JSON.stringify({ title, description, tag })
         })
-        const json =await response.json();
-        console.log(json);
-        let newNote = JSON.parse(JSON.stringify(notes));
+        const note = await response.json(); 
+        console.log(note);       
+        let newNotes = JSON.parse(JSON.stringify(notes))
         //Logic to edit note on clent side.
-        for (let index = 0; index < newNote.length; index++) {
-            const element = newNote[index];
+        for (let index = 0; index < newNotes.length; index++) {
+            const element = newNotes[index];
             if (element._id === id) {
-                newNote[index] = title;
-                newNote[index] = description;
-                newNote[index] = tag;
+                newNotes[index].title = title;
+                newNotes[index].description = description;
+                newNotes[index].tag = tag;
                 break;
             }
         }
-        setNotes(newNote);
+        setNotes(newNotes);
     }
 
 
 
 
-    //Values to update as global state are passed in value property
+    //Values to update as global state/props are passed in value property
     //state:state is equivalent to state that's why we pass directly updateState as second parameter which work as updateState:updateState    
     return (
         <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes }}>

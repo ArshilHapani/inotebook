@@ -16,7 +16,13 @@ export default function Navbar() {
                         <li><Link className='top-nav-item prime' to="/">iNotebook</Link></li>
                         <li><Link className={`top-nav-item ${location.pathname === '/' ? 'active' : ''}`} to="/">Home</Link></li>
                         <li><Link className={`top-nav-item ${location.pathname === '/about' ? 'active' : ''}`} to="/about">About</Link></li>
+                        <div className='right-align'>
+                        <li><Link className={`top-nav-item ${location.pathname === '/login' ? 'active' : ''}`} to="/login">Login</Link></li>
+                        <li><Link className={`top-nav-item ${location.pathname === '/signup' ? 'active' : ''}`} to="/signup">Sign up</Link></li>
+                        </div>
                     </ul>
+                    
+                    
                 </nav>
             </header>
         </>

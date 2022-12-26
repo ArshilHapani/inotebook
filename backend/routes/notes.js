@@ -25,7 +25,7 @@ router.get('/fetchallnotes', fetchuser, async (req, res) => {
 // Adding a new notes : POST "/api/notes/addnote". no login required
 router.post('/addnote', fetchuser, [
    body('title', 'title required').isLength({ min: 3 }),
-   body('description', 'minimum description length required 5 char').isLength({ min: 7 })
+   body('description', 'minimum description length required 5 char').isLength({ min: 5 })
 ], async (req, res) => {
    try {
       const { title, description, tag } = req.body;
@@ -48,7 +48,7 @@ router.post('/addnote', fetchuser, [
       res.status(500).send({
          message: "internal server error",
       })
-      console.log({ errorMessage: error.message });
+      console.log({ errorMessage: error.message },error);
    }
 
 })

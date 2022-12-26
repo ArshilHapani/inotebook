@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../middleware/fetchuser');
-
+let success;
 const JWT_SECRET = "ArshilIsLegend" //Secret variable use to generate and varify token
 //! ROUTE-1
 // Create a user using: POST "/api/auth/createuser". Doesn't require authentication and login
@@ -25,7 +25,8 @@ router.post('/createuser', [
             //Check whether the user's email exists already
             let user = await User.findOne({ email: req.body.email })
             if (user) {
-                return res.status(400).json({ error: "User already exists" });
+                success = false;
+                return res.status(400).json({ success,error: "User already exists" });
             }
             //Generating Encrypted Password
 
@@ -46,11 +47,14 @@ router.post('/createuser', [
 
 
             const authToken = jwt.sign(data, JWT_SECRET);
-            res.send({ authToken })
+            success = true;
+            res.send({ success,authToken })
             // res.send(user);
 
         } catch (error) {
+            success=false
             res.status(500).send({
+                success,
                 message: "internal server error",
             })
             console.log({ errorMessage: error.message })
@@ -68,7 +72,8 @@ router.post('/login', [
         //If there are errors then return bad request and the errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            success = false;
+            return res.status(400).json({ success,errors: errors.array() });
         }
         //Destructuring the email and password from the req.body
         const { email, password } = req.body;
@@ -76,12 +81,14 @@ router.post('/login', [
             //Verifying user's email
             let user = await User.findOne({ email })
             if (!user) {
-                return res.status(400).json({ "error": "enter a valid email address or password" });
+                success = false;
+                return res.status(400).json({success, "error": "enter a valid email address or password" });
             }
             //Verifying user's password
             const passwordCompare = await bcrypt.compare(password, user.password);
             if (!passwordCompare) {
-                return res.status(400).json({ "error": "enter a valid email address or password" });
+                success = false;
+                return res.status(400).json({ success,"error": "enter a valid email address or password" });
             }
             // Sending jwt to server
             const data = {
@@ -90,9 +97,12 @@ router.post('/login', [
                 }
             }
             const authToken = jwt.sign(data, JWT_SECRET);
-            res.send({ authToken })
+            success = true;
+            res.send({ success,authToken })
         } catch (error) {
+            success = false
             res.status(500).send({
+                success,
                 message: "internal server error",
             })
             console.log({ errorMessage: error.message })
@@ -107,9 +117,12 @@ router.post('/getuser',fetchuser,async (req, res) => {
         try {
             const userId = req.user.id;
             const user = await User.findById(userId).select('-password'); // here .select method is used to select every field except password
-            res.send({user})
+            success = true;
+            res.send({success,user})
         } catch (error) {
+            success = false;
             res.status(401).send({
+                success,
                 message: "internal server error",
             })
             console.log({ errorMessage: error.message })

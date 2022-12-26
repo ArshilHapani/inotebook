@@ -20,6 +20,7 @@ body {
 header {
   padding: 2vh 0.7vw;
   background-color: #f8f9fa;
+  width: 100vw;
 }
 header ul {
   display: flex;
@@ -31,13 +32,19 @@ header ul .top-nav-item {
   font-size: 2.6vh;
   cursor: pointer;
   color: #585858;
-  text-decoration: none;
+  text-decoration: none;  
 }
 header ul .top-nav-item.active {
   color: black;
 }
 header ul .top-nav-item.prime {
   font-size: 1.3em;
+}
+header ul .right-align{
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  right: 1vw;
 }
 /* ----------------------------------- Dark Container-------------------------------------- */
 .dark-container {
@@ -93,7 +100,7 @@ header ul .top-nav-item.prime {
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly;    */
   align-items: center;
   flex-wrap: wrap;
   width: 70vw;
@@ -260,7 +267,7 @@ header ul .top-nav-item.prime {
     opacity: 1;
   }
 }
-.modal-footer button {
+.classic-button {
   padding: 8px 10px;
   background-color: transparent;
   border: 1px solid black;
@@ -276,8 +283,14 @@ header ul .top-nav-item.prime {
   -ms-transition: 0.17s ease-in-out;
   -o-transition: 0.17s ease-in-out;
 }
-.modal-footer button:hover {
+.classic-button:hover {
   background-color: black;
   color: #fff;
   border: 1px solid #fff;
+}
+.classic-button:disabled{
+  display: none;
+}
+.classic-button.userSpecial{
+  width: fit-content;
 }
