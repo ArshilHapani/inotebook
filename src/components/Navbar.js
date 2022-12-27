@@ -8,7 +8,11 @@ export default function Navbar() {
     // React.useEffect(() => {
     //     // console.log(location.pathname)
     // }, [location])
-    return (
+    const handleLogOut = ()=>{
+        localStorage.removeItem('authtoken');
+        navigator('/login');
+    }
+    return (        
         <>
             <header>
                 <nav>
@@ -17,12 +21,15 @@ export default function Navbar() {
                         <li><Link className={`top-nav-item ${location.pathname === '/' ? 'active' : ''}`} to="/">Home</Link></li>
                         <li><Link className={`top-nav-item ${location.pathname === '/about' ? 'active' : ''}`} to="/about">About</Link></li>
                         <div className='right-align'>
-                        <li><Link className={`top-nav-item ${location.pathname === '/login' ? 'active' : ''}`} to="/login">Login</Link></li>
-                        <li><Link className={`top-nav-item ${location.pathname === '/signup' ? 'active' : ''}`} to="/signup">Sign up</Link></li>
+                            {!localStorage.getItem('authtoken') ?
+                                <>
+                                    <li><Link className={`top-nav-item ${location.pathname === '/login' ? 'active' : ''}`} to="/login">Login</Link></li>
+                                    <li><Link className={`top-nav-item ${location.pathname === '/signup' ? 'active' : ''}`} to="/signup">Sign up</Link></li>
+                                </> : <li><Link onClick={handleLogOut} className='top-nav-item active'><ion-icon name="log-out-outline"></ion-icon></Link></li>}
                         </div>
                     </ul>
-                    
-                    
+
+
                 </nav>
             </header>
         </>

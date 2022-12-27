@@ -7,3 +7,5 @@ const connectToMongo = ()=>{
     })
 }
 module.exports = connectToMongo;
+//Connection string to connect to MongoDB atlas
+// mongodb+srv://iNotebook:Dpz3t4VaAivZXBO2@atlascluster.hmqrnbm.mongodb.net/test

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import noteContext from "../context/notes/NoteContext";
 
-export default function AddNote() {
+export default function AddNote(props) {
     const context = useContext(noteContext);
     const [note, setNote] = useState({ title: "", description: "", tag: "" })
     const { addNote } = context;
@@ -9,7 +9,8 @@ export default function AddNote() {
     const handleClick = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
-        setNote({ title: "", description: "", tag: "" })
+        setNote({ title: "", description: "", tag: "" });
+        props.showAlert("green","New note added successfully")
     }
     //Updating the current value of the note and creating a new note
     const onChange = (e) => {
@@ -26,7 +27,7 @@ export default function AddNote() {
                 <label htmlFor="title">Enter Title</label>
                 <input type="text" className="title-input" id='title' value={note.title}  name="title" onChange={onChange} placeholder="Minimum length 3 needed" /><br />
                 <label htmlFor="description">Description</label>
-                <textarea name="description" className="title-input desc" value={note.description} id="description" cols="30" rows="10" onChange={onChange} placeholder="Minimum length 5 needed"></textarea>
+                <textarea name="description" className="title-input desc" value={note.description} id="description" cols="30" rows="4" onChange={onChange} placeholder="Minimum length 5 needed"></textarea>
                 <label htmlFor="tag">Tag</label>
                 <input type="text" className="title-input" placeholder="Optional" value={note.tag} id='tag' name="tag" onChange={onChange} />
                 <button disabled={note.title.length < 3 || note.description.length < 5} className="add-note-btn" onClick={handleClick}><ion-icon name="add-outline"></ion-icon></button>

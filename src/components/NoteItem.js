@@ -12,7 +12,7 @@ export default function NoteItem(props) {
                 <div className="card-body">
                     <h5 className="notes-card-title">{note.title}</h5>
                     <p className="notes-card-description">{note.description}</p>
-                    <span className='card-modif-icon' onClick={()=>{deleteNote(note._id)}}><ion-icon name="trash-outline"></ion-icon></span>
+                    <span className='card-modif-icon' onClick={()=>{deleteNote(note._id); props.showAlert("red","Note Deleted")}}><ion-icon name="trash-outline"></ion-icon></span>
                     <span className='card-modif-icon' onClick={()=>{updateNote(note)}}><ion-icon name="create-outline"></ion-icon></span>
                 </div>
             </div>

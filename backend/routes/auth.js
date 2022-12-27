@@ -12,7 +12,7 @@ const JWT_SECRET = "ArshilIsLegend" //Secret variable use to generate and varify
 router.post('/createuser', [
     body('name', 'minimum name length require *3 char').isLength({ min: 3 }),
     body('email', 'Enter a valid email format').isEmail(),
-    body('password', 'minimum password length require *7 char max *20 char').isLength({ min: 7, max: 20 })
+    body('password', 'minimum password length require *7 char max *20 char').isLength({ min: 7 })
 ],
     async (req, res) => {
 

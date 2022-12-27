@@ -1,15 +1,23 @@
 import React, { useContext, useEffect, useRef, useState } from "react"; //!Use ref hooks are used to provide reference to any element
+import { useNavigate } from "react-router-dom";
 import noteContext from "../context/notes/NoteContext";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
 
 
-export default function Notes() {    
+export default function Notes(props) {    
     const context = useContext(noteContext);
     const { notes, getNotes, editNote } = context;
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "default" });
+    let navigate = useNavigate();
     useEffect(() => {
-        getNotes();
+        if(localStorage.getItem('authtoken')){
+            getNotes();
+        }
+        else{
+            props.showAlert("yellow","Please login or create a new account to use our service");
+            navigate("/signup")
+        }
         // eslint-disable-next-line    
     }, [])
 
@@ -21,7 +29,7 @@ export default function Notes() {
             etitle: currentNote.title,
             edescription: currentNote.description,
             etag: currentNote.tag,
-        });
+        });       
     }
     const ref1 = useRef(null);
     const closeRef = useRef(null);
@@ -29,6 +37,7 @@ export default function Notes() {
     const handleClick = () => {
         editNote(note.id, note.etitle, note.edescription, note.etag);
         closeRef.current.click();
+        props.showAlert("green","Notes Updated");
     }
     //Updating the current value of the note and creating a new note
     const onChange = (e) => {
@@ -58,9 +67,10 @@ export default function Notes() {
         }
     }
     toggleModel();
+    const {showAlert} = props;
     return (
         <div >
-            <AddNote key={notes.id} />
+            <AddNote key={notes.id} showAlert={showAlert} />
             <button id="myBtn" style={{ display: 'none' }} ref={ref1}  >Open Modal</button>
             <div id="myModal" className="modal">
                 <div className="modal-content">
@@ -90,7 +100,7 @@ export default function Notes() {
                 <div className="row">
                     <h3 style={{ marginBottom: '5vh' }}>{notes.length === 0 && "No notes available..."}</h3>
                     {notes.map((note) => {                      
-                        return <NoteItem key={note._id} updateNote={updateNote} note={note} />;
+                        return <NoteItem showAlert={showAlert} key={note._id} updateNote={updateNote} note={note} />;
                     })}
                 </div>
             </div>
