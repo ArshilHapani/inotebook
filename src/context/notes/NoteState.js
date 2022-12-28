@@ -3,7 +3,7 @@ import NoteContext from './NoteContext';
 const NoteState = (props) => {
     let host = "http://localhost:3500";
     const [notes, setNotes] = useState([]);
-    
+
 
     //! Get all note    
     const getNotes = async () => {
@@ -23,17 +23,15 @@ const NoteState = (props) => {
 
     //! Add a note    
     const addNote = async (title, description, tag) => {
-        //API Call
-        // const response =
-         await fetch(`${host}/api/notes/addnote`, {
+        //API Call    
+        await fetch(`${host}/api/notes/addnote`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('authtoken')
             },
             body: JSON.stringify({ title, description, tag })
-        })
-        // const json = await response.json();
+        })        
         //On client side      
 
         let note = {
@@ -52,17 +50,13 @@ const NoteState = (props) => {
     //! Delete a note
     const deleteNote = async (id) => {
         //API Call
-        // const response =
-         await fetch(`${host}/api/notes/deletenote/${id}`, {
+        await fetch(`${host}/api/notes/deletenote/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('authtoken')
             },
-            // body: JSON.stringify({ id })
         })
-        // const json = response.json();
-        // console.log(json);
         //Client side method
         let newNotes = notes.filter((note) => {
             return note._id !== id
@@ -74,7 +68,7 @@ const NoteState = (props) => {
     //! Edit a note
     const editNote = async (id, title, description, tag) => {
         //API Call
-        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+      await fetch(`${host}/api/notes/updatenote/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,8 +76,6 @@ const NoteState = (props) => {
             },
             body: JSON.stringify({ title, description, tag })
         })
-        const note = await response.json();
-        console.log(note);
         let newNotes = JSON.parse(JSON.stringify(notes))
         //Logic to edit note on clent side.
         for (let index = 0; index < newNotes.length; index++) {
@@ -99,10 +91,6 @@ const NoteState = (props) => {
     }
 
 
-
-
-    //Values to update as global state/props are passed in value property
-    //state:state is equivalent to state that's why we pass directly updateState as second parameter which work as updateState:updateState    
     return (
         <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes }}>
             {props.children}

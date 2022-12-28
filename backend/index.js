@@ -14,7 +14,5 @@ app.use('/api/notes',require('./routes/notes'));
 app.listen(port, () => {
   console.log(`Notebook app backend listening on port http://localhost:${port}`)
 })
-//Command to run...
-//! npx nodemon .\index.js -Y
 
 

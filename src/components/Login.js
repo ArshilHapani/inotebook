@@ -15,11 +15,10 @@ export default function Login(props) {
             body: JSON.stringify({email:mail.current.value,password:password.current.value})
         });        
         const json = await response.json();
-        console.log(json);
         //Verifying status from backend        
         if(json.success){
             //Redirect to home page after saving authtoken
-            localStorage.setItem('authtoken',json.authToken);
+            localStorage.setItem('authtoken',json.authToken);            
             navigate("/"); //!Use navigate hook latest version
             props.showAlert("green","Welcome back !");
         }else{

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef ,useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUp(props) {
@@ -7,7 +7,9 @@ export default function SignUp(props) {
   const refMail = useRef();
   const refPassword = useRef();
   const refCPassword = useRef();
-  const {showAlert} = props;
+  const {showAlert} = props;  
+  const [pwd, setPwd] = useState();
+  const [cPwd, setCpwd] = useState();
   const handleClick = async (e) => {
     e.preventDefault();
     const response = await fetch('http://localhost:3500/api/auth/createuser', {
@@ -21,8 +23,7 @@ export default function SignUp(props) {
         password: refPassword.current.value
       })
     })
-    const json = await response.json();
-    console.log(json);
+    const json = await response.json();  
     //Verifying status from backend        
     if (json.success) {
       //Redirect to home page after saving authtoken
@@ -32,7 +33,17 @@ export default function SignUp(props) {
     } else {
       showAlert("red","Invalid credentials");
     }
+    
   }
+  const handleChangePwd = async(e)=>{
+       setPwd(e.target.value);
+  }
+  const handleChangeCpwd = e =>{
+    setCpwd(e.target.value);
+  }
+  // if(pwd !== cPwd){
+  //   showAlert("red","Password  and confirm password mismatch");  
+  // }
   return (
     <div>
       <div className='form-container'>
@@ -43,10 +54,10 @@ export default function SignUp(props) {
           <label htmlFor="Email">Email</label>
           <input type="email" ref={refMail} className="title-input" id='email' name="email" placeholder="E-Mail" required/><br />
           <label htmlFor="password">Password</label>
-          <input type="password" ref={refPassword} className="title-input" placeholder="Create a Strong Password (minimum length 7 char)" id='password' name="password" required minLength={7}/><br />
+          <input type="password" ref={refPassword} className="title-input" placeholder="Create a Strong Password (minimum length 7 char)" id='password' name="password" required minLength={7} onChange={handleChangePwd}/><br />
           <label htmlFor="Confirm-password">Confirm Password</label>
-          <input type="password" ref={refCPassword} className="title-input" placeholder="Confirm your Password" id='Confirm-password' name="Confirm-password" required minLength={7}/><br /><br />
-          <button className="classic-button userSpecial">Sign up</button>
+          <input type="password" ref={refCPassword} className="title-input" placeholder="Confirm your Password" id='Confirm-password' name="Confirm-password" onChange={handleChangeCpwd} required minLength={7}/><br /><br />
+          <button className="classic-button userSpecial" disabled={pwd !== cPwd}>Sign up</button>
         </form>
       </div>
     </div>

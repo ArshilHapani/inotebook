@@ -11,6 +11,7 @@ import NoteState from './context/notes/NoteState';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { useState } from 'react';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -56,6 +57,11 @@ function App() {
                   <SignUp showAlert={showAlert}/>
                 }
               />
+              <Route
+              exact path='/profile'
+              element={
+                <Profile/>
+              }/>
             </Routes>          
         </Router>
       </NoteState>
@@ -64,4 +70,3 @@ function App() {
 }
 
 export default App;
-//TODO Make user profile viewer

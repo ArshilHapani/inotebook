@@ -107,4 +107,3 @@ export default function Notes(props) {
         </div>
     )
 }
-//TODO : Notes is'nt updating in the client side

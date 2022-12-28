@@ -5,15 +5,18 @@
 }
 body {
   overflow-x: hidden;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
+  background-image: url(./images/scattered-forcefields.png);
+  background-attachment: fixed;
+  background-size: cover;
 }
-::-webkit-scrollbar{
-  width: .4vw;
+::-webkit-scrollbar {
+  width: 0.4vw;
 }
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background-color: white;
 }
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: #000000;
 }
 /*------------------------------------ Navbar ----------------------------------------------*/
@@ -32,7 +35,7 @@ header ul .top-nav-item {
   font-size: 2.6vh;
   cursor: pointer;
   color: #585858;
-  text-decoration: none;  
+  text-decoration: none;
 }
 header ul .top-nav-item.active {
   color: black;
@@ -40,7 +43,7 @@ header ul .top-nav-item.active {
 header ul .top-nav-item.prime {
   font-size: 1.3em;
 }
-header ul .right-align{
+header ul .right-align {
   display: flex;
   justify-content: flex-end;
   position: absolute;
@@ -50,7 +53,7 @@ header ul .right-align{
 .dark-container {
   background-color: #121212 !important;
   color: #fff;
- }
+}
 /* ----------------------------------- Notes input Form-------------------------------------- */
 .form-container {
   margin: 2vh 0 0 0;
@@ -288,9 +291,39 @@ header ul .right-align{
   color: #fff;
   border: 1px solid #fff;
 }
-.classic-button:disabled{
+.classic-button:disabled {
   display: none;
 }
-.classic-button.userSpecial{
+.classic-button.userSpecial {
   width: fit-content;
+}
+
+/* ----------------------------------Profile Page------------------------------------------------ */
+.profile-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 97vh;
+  margin-top: 5vh;
+  justify-content: center;  
+}
+.profile-container {
+  width: 50vw;
+  height: 75vh;
+  background-color: #a3a3a347;
+  border-radius: 4vh;
+  padding: 4vh;
+  -webkit-border-radius: 4vh;
+  -moz-border-radius: 4vh;
+  -ms-border-radius: 4vh;
+  -o-border-radius: 4vh;
+}
+.userdata{
+  padding: 2vh;
+}
+.userdata h2{
+  padding-bottom: 2vh;
+}
+.about-li{
+  padding: 3vh 2vw;
+  font-size: 3.5vh;
 }

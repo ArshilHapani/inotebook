@@ -22,7 +22,7 @@ router.get('/fetchallnotes', fetchuser, async (req, res) => {
 
 
 //! ROUTE-2
-// Adding a new notes : POST "/api/notes/addnote". no login required
+// Adding a new notes : POST "/api/notes/addnote". no login required as login is done using middleware for this endpoint
 router.post('/addnote', fetchuser, [
    body('title', 'title required').isLength({ min: 3 }),
    body('description', 'minimum description length required 5 char').isLength({ min: 5 })
