@@ -41,9 +41,7 @@ export default function SignUp(props) {
   const handleChangeCpwd = e =>{
     setCpwd(e.target.value);
   }
-  // if(pwd !== cPwd){
-  //   showAlert("red","Password  and confirm password mismatch");  
-  // }
+  
   return (
     <div>
       <div className='form-container'>

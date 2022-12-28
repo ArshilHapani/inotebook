@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react';
 export default  function Profile() {
     const [user, setUser] = useState({});
         useEffect(() => {
-          
-            
-            // (async()=>{                
+                                  
         const getUser = async () => {
             let response = await fetch("http://localhost:3500/api/auth/getuser", {
                 method: "POST",
@@ -29,12 +27,7 @@ export default  function Profile() {
             getUser();
         }, [])
         
-    
 
-    
-    //  getUser().then((user) => {
-    //     console.log(user);        
-    // }).catch(error => console.log(error));    
     return (
         <>
             <div className='profile-wrapper'>
