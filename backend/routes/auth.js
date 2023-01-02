@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+require('dotenv').config();
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../middleware/fetchuser');
 let success;
-const JWT_SECRET = "ArshilIsLegend" //Secret variable use to generate and verify token
+const JWT_SECRET = process.env.JWT_SECRET_KEY; //Secret variable use to generate and verify token
 
 
 

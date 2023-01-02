@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb+srv://iNotebook:Dpz3t4VaAivZXBO2@atlascluster.hmqrnbm.mongodb.net/test";
+require('dotenv').config();
+const mongoURI = process.env.MONGO_URI;
 
 const connectToMongo = ()=>{
     mongoose.connect(mongoURI,()=>{
@@ -7,5 +8,3 @@ const connectToMongo = ()=>{
     })
 }
 module.exports = connectToMongo;
-//Connection string to connect to MongoDB atlas
-// mongodb+srv://iNotebook:Dpz3t4VaAivZXBO2@atlascluster.hmqrnbm.mongodb.net/test
